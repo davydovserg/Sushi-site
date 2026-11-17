@@ -544,6 +544,7 @@ textarea.inp{height:84px;padding:14px 16px;resize:none}
 <div class="toast js-toast" role="status"></div>
 
 <script src="data.js"></script>
+<script src="extra.js"></script>
 <script>
 /* ===== Настройки ===== */
 const CONFIG = {
@@ -588,7 +589,7 @@ function sync(id){
 }
 
 /* ===== Рендер меню ===== */
-const card = i => `<article class="card rv" data-open="${i.id}">
+const card = i => `<article class="card rv" data-open="${i.id}">${i.n ? '<span class="badge" style="position:absolute;top:14px;left:14px;z-index:2">New</span>' : ''}
   <div class="pic"><img src="${i.img}" alt="${esc(i.t)}" loading="lazy" decoding="async"></div>
   <h4>${esc(i.t)}</h4><p class="desc">${esc(i.d)}</p>${i.w ? `<p class="w">${esc(i.w)}</p>` : ''}
   <div class="foot"><span class="price">${i.p.toLocaleString('ru-RU')}<small>₽</small></span><span data-ctl="${i.id}">${ctl(i.id)}</span></div></article>`;
