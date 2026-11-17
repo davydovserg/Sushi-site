@@ -240,6 +240,7 @@ h2{font-family:var(--disp);font-weight:400;font-size:clamp(34px,5vw,68px);line-h
 .wk-chip:hover{border-color:var(--text)}
 .wk-chip.on{background:var(--text);color:#fff;border-color:var(--text)}
 .wk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.wk-g{grid-column:1/-1;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-top:4px}
 .wk-t{border:1px solid var(--line);border-radius:18px;padding:10px 8px 12px;text-align:center;position:relative;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s var(--spring);background:#fff;display:flex;flex-direction:column;align-items:center}
 .wk-t:hover{border-color:var(--line2);transform:translateY(-2px)}
 .wk-t img{width:76%;aspect-ratio:1;object-fit:cover;border-radius:50%}
@@ -252,7 +253,7 @@ h2{font-family:var(--disp);font-weight:400;font-size:clamp(34px,5vw,68px);line-h
 .wk-s img{width:64%;aspect-ratio:1;object-fit:cover;border-radius:50%}
 .wk-s b{font-size:13px;margin-top:8px;line-height:1.2}
 .wk-s.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
-.wk-sauces{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.wk-sauces{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .wk-foot{position:sticky;bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 14px 14px 22px;border-radius:24px;background:var(--text);color:#fff;box-shadow:0 20px 40px -16px rgba(0,0,0,.45)}
 .wk-foot small{opacity:.7;display:block;font-size:13px;line-height:1.3}
 .wk-foot b{font-family:var(--disp);font-size:28px;font-weight:400;white-space:nowrap}
@@ -537,13 +538,13 @@ textarea.inp{height:84px;padding:14px 16px;resize:none}
 
 <section class="sec" id="cat-wok">
   <div class="wrap">
-    <div class="sec-h rv"><div><span class="eyebrow">Конструктор Wok</span><h2>Соберите свой WOK</h2></div><p>В основу входит овощной микс: болгарский перец, пекинская капуста, цукини, лук и морковь.</p></div>
+    <div class="sec-h rv"><div><span class="eyebrow">Конструктор Wok</span><h2>WOK: лапша + овощи + соус</h2></div><p>Выберите лапшу и соус, добавьте рыбу, мясо или топпинги. Овощной микс уже входит.</p></div>
     <div class="wk">
       <div class="wk-vis"><img class="js-wk-img" src="wok/udon.webp" alt="Основа WOK"><div class="wk-tops js-wk-vis"></div></div>
       <div class="wk-ui">
-        <div class="wk-step"><h4><b>1</b>Основа</h4><div class="wk-bases js-wk-bases"></div></div>
+        <div class="wk-step"><h4><b>1</b>Лапша<small>на выбор</small></h4><div class="wk-bases js-wk-bases"></div></div>
         <div class="wk-step"><h4><b>2</b>Топпинги<small>можно несколько</small></h4><div class="wk-grid js-wk-tops"></div></div>
-        <div class="wk-step js-wk-sstep"><h4><b>3</b>Соус<small>выберите один</small></h4><div class="wk-sauces js-wk-sauces"></div></div>
+        <div class="wk-step js-wk-sstep"><h4><b>3</b>Соус<small>на выбор</small></h4><div class="wk-sauces js-wk-sauces"></div></div>
         <div class="wk-foot"><div><small class="js-wk-sum"></small><b class="js-wk-price"></b></div><button class="btn btn-a js-wk-add">В корзину</button></div>
       </div>
     </div>
@@ -648,9 +649,9 @@ let cart = {};
 try { cart = JSON.parse(localStorage.getItem('sm-cart') || '{}'); } catch(e) {}
 /* ===== Конструктор WOK: данные ===== */
 const WOK = { base: 299,
-  bases: [['udon','Лапша пшеничная'],['egg','Лапша яичная'],['funchoza','Фунчоза'],['soba','Соба'],['rice','Рис отварной']],
-  tops: [['t-chicken','Курица',109],['t-beef','Говядина',129],['t-salmon','Лосось',179],['t-shrimp','Креветки',179],['t-mush','Шампиньоны',99],['t-parm','Сыр Пармезан',99],['t-cherry','Томаты черри',99],['t-egg','Яйцо куриное',59]],
-  sauces: [['s-teriyaki','Терияки'],['s-sweet','Кисло-сладкий (острый)'],['s-hot','Острый'],['s-garlic','Сливочно-чесночный'],['s-tonkatsu','Тонкацу'],['s-oyster','Устричный'],['s-spicy','Пикантный']] };
+  bases: [['udon','Удон (пшеничная)'],['soba','Соба (гречневая)'],['funchoza','Фунчоза (рисовая)'],['rice','Рис отварной'],['egg','Яичная']],
+  tops: [['t-salmon','Лосось',179,'Рыба'],['t-shrimp','Креветки',179,'Рыба'],['t-chicken','Курица',109,'Мясо'],['t-beef','Говядина',129,'Мясо'],['t-mush','Шампиньоны',99,'Топпинги'],['t-parm','Сыр пармезан',99,'Топпинги'],['t-cherry','Черри',99,'Топпинги'],['t-egg','Яйцо куриное',59,'Топпинги']],
+  sauces: [['s-teriyaki','Терияки'],['s-oyster','Устричный'],['s-sweet','Кисло-сладкий'],['s-garlic','Сливочно-чесночный'],['s-hot','Острый']] };
 let WOKS = {}; try { WOKS = JSON.parse(localStorage.getItem('sm-wok') || '{}'); } catch(e) {}
 const regWok = w => { BY[w.id] = Object.assign({cat:'Конструктор Wok', catId:'wok', img:'wok/main.webp', w:''}, w); };
 Object.values(WOKS).forEach(regWok);
@@ -873,7 +874,7 @@ const wkName = k => (WOK.bases.find(b => b[0] === k) || WOK.sauces.find(b => b[0
 const wkPrice = () => WOK.base + Object.entries(wk.tops).reduce((a,[k,q]) => a + WT[k][2]*q, 0);
 function wkRender(){
   $('.js-wk-bases').innerHTML = WOK.bases.map(([k,n]) => `<button class="wk-chip${wk.base===k?' on':''}" data-wb="${k}">${n}</button>`).join('');
-  $('.js-wk-tops').innerHTML = WOK.tops.map(([k,n,p]) => { const q = wk.tops[k]||0; return `<div class="wk-t${q?' on':''}" data-wt="${k}"><img src="wok/${k}.webp" alt="" loading="lazy"><b>${n}</b>${q ? `<div class="wk-q"><button data-wq="-" aria-label="Меньше">−</button>${q}<button data-wq="+" aria-label="Больше">+</button></div>` : `<span class="pr">+${p} ₽</span>`}</div>`; }).join('');
+  $('.js-wk-tops').innerHTML = WOK.tops.map(([k,n,p,g],i) => (i===0||WOK.tops[i-1][3]!==g ? `<div class="wk-g">${g}</div>` : '') + (() => { const q = wk.tops[k]||0; return `<div class="wk-t${q?' on':''}" data-wt="${k}"><img src="wok/${k}.webp" alt="" loading="lazy"><b>${n}</b>${q ? `<div class="wk-q"><button data-wq="-" aria-label="Меньше">−</button>${q}<button data-wq="+" aria-label="Больше">+</button></div>` : `<span class="pr">+${p} ₽</span>`}</div>`; })()).join('');
   $('.js-wk-sauces').innerHTML = WOK.sauces.map(([k,n]) => `<div class="wk-s${wk.sauce===k?' on':''}" data-ws="${k}"><img src="wok/${k}.webp" alt="" loading="lazy"><b>${n}</b></div>`).join('');
   $('.js-wk-vis').innerHTML = Object.entries(wk.tops).map(([k,q]) => `<span style="background-image:url(wok/${k}.webp)" data-q="${q}" title="${WT[k][1]}"></span>`).join('');
   const tl = Object.entries(wk.tops).map(([k,q]) => WT[k][1].toLowerCase() + (q>1?' ×'+q:''));
