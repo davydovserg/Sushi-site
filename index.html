@@ -220,6 +220,54 @@ h2{font-family:var(--disp);font-weight:400;font-size:clamp(34px,5vw,68px);line-h
 .map{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);min-height:420px;background:var(--bg2);position:relative}
 .map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
+
+/* ---------- конструктор WOK ---------- */
+.wk{display:grid;grid-template-columns:1fr 1.1fr;gap:24px;align-items:start}
+.wk-vis{position:sticky;top:96px;border-radius:32px;background:radial-gradient(circle at 50% 45%,#fff,var(--bg2) 70%);aspect-ratio:1;display:grid;place-items:center;overflow:hidden;border:1px solid var(--line)}
+.wk-vis>img{width:84%;transition:opacity .25s,transform .5s var(--ease)}
+.wk-vis>img.sw{opacity:0;transform:scale(.94)}
+.wk-tops{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.wk-tops span{width:58px;height:58px;border-radius:50%;background:#fff center/cover;box-shadow:0 8px 18px rgba(60,30,10,.2);border:3px solid #fff;position:relative;animation:pop .45s var(--spring)}
+.wk-tops span[data-q]:not([data-q="1"])::after{content:"×" attr(data-q);position:absolute;top:-6px;right:-8px;background:var(--accent);color:#120c09;font-size:11px;font-weight:800;border-radius:99px;padding:2px 6px}
+.wk-ui{display:flex;flex-direction:column;gap:12px}
+.wk-step{border:1px solid var(--line);border-radius:24px;padding:20px;background:#fff}
+.wk-step h4{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;margin-bottom:14px}
+.wk-step h4 b{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#120c09;display:grid;place-items:center;font-size:14px;flex:none}
+.wk-step h4 small{color:var(--dim);font-weight:600;font-size:13px;margin-left:auto}
+.wk-step.need{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,91,46,.15)}
+.wk-bases{display:flex;flex-wrap:wrap;gap:8px}
+.wk-chip{height:44px;padding:0 16px;border-radius:99px;border:1px solid var(--line2);font-weight:700;font-size:14px;transition:all .2s var(--ease)}
+.wk-chip:hover{border-color:var(--text)}
+.wk-chip.on{background:var(--text);color:#fff;border-color:var(--text)}
+.wk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.wk-t{border:1px solid var(--line);border-radius:18px;padding:10px 8px 12px;text-align:center;position:relative;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s var(--spring);background:#fff;display:flex;flex-direction:column;align-items:center}
+.wk-t:hover{border-color:var(--line2);transform:translateY(-2px)}
+.wk-t img{width:76%;aspect-ratio:1;object-fit:cover;border-radius:50%}
+.wk-t b{display:block;font-size:13px;margin-top:8px;line-height:1.2;min-height:2.4em}
+.wk-t .pr{font-size:13px;color:var(--accent);font-weight:800;margin-top:4px}
+.wk-t.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.wk-q{display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:6px;background:var(--accent);border-radius:99px;color:#120c09;font-weight:800;font-size:14px}
+.wk-q button{width:32px;height:30px;font-size:18px;font-weight:800}
+.wk-s{border:1px solid var(--line);border-radius:18px;padding:10px 8px 12px;text-align:center;cursor:pointer;background:#fff;transition:border-color .2s,box-shadow .2s;display:flex;flex-direction:column;align-items:center}
+.wk-s img{width:64%;aspect-ratio:1;object-fit:cover;border-radius:50%}
+.wk-s b{font-size:13px;margin-top:8px;line-height:1.2}
+.wk-s.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.wk-sauces{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.wk-foot{position:sticky;bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 14px 14px 22px;border-radius:24px;background:var(--text);color:#fff;box-shadow:0 20px 40px -16px rgba(0,0,0,.45)}
+.wk-foot small{opacity:.7;display:block;font-size:13px;line-height:1.3}
+.wk-foot b{font-family:var(--disp);font-size:28px;font-weight:400;white-space:nowrap}
+.wk-foot .btn{height:52px;flex:none}
+@media (max-width:900px){.wk{grid-template-columns:1fr}.wk-vis{position:relative;top:0;aspect-ratio:16/10}.wk-vis>img{width:auto;height:78%}}
+@media (max-width:640px){
+  .wk-step{padding:16px;border-radius:20px}
+  .wk-grid,.wk-sauces{grid-template-columns:repeat(3,1fr);gap:8px}
+  .wk-chip{height:40px;padding:0 13px;font-size:13px}
+  .wk-tops span{width:46px;height:46px}
+  .wk-foot{bottom:calc(84px + env(safe-area-inset-bottom));padding:12px 12px 12px 16px}
+  .wk-foot b{font-size:22px}
+  .wk-foot .btn{height:46px;padding:0 18px;font-size:15px}
+}
+
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);padding:clamp(48px,6vw,80px) 0 calc(32px + env(safe-area-inset-bottom));background:var(--bg2);overflow:hidden}
 .f-big{font-family:var(--disp);font-size:clamp(56px,13vw,200px);line-height:.85;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px var(--line2);white-space:nowrap;margin-bottom:48px}
@@ -430,7 +478,7 @@ textarea.inp{height:84px;padding:14px 16px;resize:none}
   <div class="wrap">
     <a href="#top" class="logo" aria-label="Sushi&amp;Mall — на главную"><i>鮨</i><span>Sushi<b>&amp;</b>Mall</span></a>
     <nav class="nav" aria-label="Разделы">
-      <a href="#menu">Меню</a><a href="#cat-sety">Сеты</a><a href="#delivery">Доставка</a><a href="#contacts">Контакты</a>
+      <a href="#menu">Меню</a><a href="#cat-wok">Собрать WOK</a><a href="#cat-sety">Сеты</a><a href="#delivery">Доставка</a><a href="#contacts">Контакты</a>
     </nav>
     <div class="hdr-r">
       <a class="phone" href="tel:+79260196000"><b>+7 (926) 019-60-00</b><small><span class="dot js-dot"></span><span class="js-open">Ежедневно 10:00–22:00</span></small></a>
@@ -486,6 +534,21 @@ textarea.inp{height:84px;padding:14px 16px;resize:none}
   </div>
 </section>
 
+
+<section class="sec" id="cat-wok">
+  <div class="wrap">
+    <div class="sec-h rv"><div><span class="eyebrow">Конструктор Wok</span><h2>Соберите свой WOK</h2></div><p>В основу входит овощной микс: болгарский перец, пекинская капуста, цукини, лук и морковь.</p></div>
+    <div class="wk">
+      <div class="wk-vis"><img class="js-wk-img" src="wok/udon.webp" alt="Основа WOK"><div class="wk-tops js-wk-vis"></div></div>
+      <div class="wk-ui">
+        <div class="wk-step"><h4><b>1</b>Основа</h4><div class="wk-bases js-wk-bases"></div></div>
+        <div class="wk-step"><h4><b>2</b>Топпинги<small>можно несколько</small></h4><div class="wk-grid js-wk-tops"></div></div>
+        <div class="wk-step js-wk-sstep"><h4><b>3</b>Соус<small>выберите один</small></h4><div class="wk-sauces js-wk-sauces"></div></div>
+        <div class="wk-foot"><div><small class="js-wk-sum"></small><b class="js-wk-price"></b></div><button class="btn btn-a js-wk-add">В корзину</button></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="menu" style="padding-top:clamp(64px,9vw,120px)">
   <div class="wrap"><div class="sec-h rv" style="margin-bottom:24px"><div><span class="eyebrow">Всё меню</span><h2>Что закажем сегодня?</h2></div><p>Нажмите на блюдо, чтобы увидеть фото крупнее и состав.</p></div></div>
@@ -583,6 +646,14 @@ const ALL = Object.values(BY);
 /* ===== Корзина ===== */
 let cart = {};
 try { cart = JSON.parse(localStorage.getItem('sm-cart') || '{}'); } catch(e) {}
+/* ===== Конструктор WOK: данные ===== */
+const WOK = { base: 299,
+  bases: [['udon','Лапша пшеничная'],['egg','Лапша яичная'],['funchoza','Фунчоза'],['soba','Соба'],['rice','Рис отварной']],
+  tops: [['t-chicken','Курица',109],['t-beef','Говядина',129],['t-salmon','Лосось',179],['t-shrimp','Креветки',179],['t-mush','Шампиньоны',99],['t-parm','Сыр Пармезан',99],['t-cherry','Томаты черри',99],['t-egg','Яйцо куриное',59]],
+  sauces: [['s-teriyaki','Терияки'],['s-sweet','Кисло-сладкий (острый)'],['s-hot','Острый'],['s-garlic','Сливочно-чесночный'],['s-tonkatsu','Тонкацу'],['s-oyster','Устричный'],['s-spicy','Пикантный']] };
+let WOKS = {}; try { WOKS = JSON.parse(localStorage.getItem('sm-wok') || '{}'); } catch(e) {}
+const regWok = w => { BY[w.id] = Object.assign({cat:'Конструктор Wok', catId:'wok', img:'wok/main.webp', w:''}, w); };
+Object.values(WOKS).forEach(regWok);
 Object.keys(cart).forEach(k => { if (!BY[k]) delete cart[k]; });
 const save = () => { try { localStorage.setItem('sm-cart', JSON.stringify(cart)); } catch(e) {} };
 const count = () => Object.values(cart).reduce((a,b) => a+b, 0);
@@ -611,7 +682,7 @@ const card = i => `<article class="card rv" data-open="${i.id}">${i.n ? '<span c
   <div class="foot"><span class="price">${i.p.toLocaleString('ru-RU')}<small>₽</small></span><span data-ctl="${i.id}">${ctl(i.id)}</span></div></article>`;
 
 $('.js-menu').innerHTML = MENU.map(c => `<div class="cat" id="cat-${c.id}" data-cat="${c.id}"><div class="cat-h"><h3>${esc(c.name)}</h3><span>${c.items.length}</span></div><div class="grid">${c.items.map(card).join('')}</div></div>`).join('');
-$('.js-tabs').innerHTML = MENU.map(c => `<button class="tab" role="tab" data-go="${c.id}">${esc(c.name)}</button>`).join('');
+$('.js-tabs').innerHTML = '<button class="tab" data-go="wok">Собрать WOK</button>' + MENU.map(c => `<button class="tab" role="tab" data-go="${c.id}">${esc(c.name)}</button>`).join('');
 $('.js-fcats').innerHTML = MENU.slice(0,7).map(c => `<a href="#cat-${c.id}">${esc(c.name)}</a>`).join('');
 const mq = MENU.map(c => `<a href="#cat-${c.id}">${esc(c.name)}</a>`).join('');
 $('.js-marq').innerHTML = mq + mq;
@@ -649,7 +720,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); 
 
 function flyFrom(btn, id){
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const src = (btn.closest('.card,.hit,.sheet') || document).querySelector('img');
+  const src = btn.matches('img') ? btn : (btn.closest('.card,.hit,.sheet') || document).querySelector('img');
   const target = innerWidth <= 640 ? $('.js-mbar') : $('.hdr .cart-btn');
   if (!src) return;
   const a = src.getBoundingClientRect(), t = target.getBoundingClientRect();
@@ -794,6 +865,41 @@ if (matchMedia('(hover:hover) and (prefers-reduced-motion:no-preference)').match
 (function(){ const h = new Date(new Date().toLocaleString('en-US', {timeZone:'Europe/Moscow'})).getHours(); const on = h >= CONFIG.open && h < CONFIG.close;
   $$('.js-dot').forEach(d => d.classList.toggle('off', !on));
   $('.js-open').textContent = on ? `Открыто до ${CONFIG.close}:00` : `Откроемся в ${CONFIG.open}:00`; })();
+
+/* ===== Конструктор WOK: интерфейс ===== */
+const wk = { base: 'udon', tops: {}, sauce: '' };
+const WT = Object.fromEntries(WOK.tops.map(t => [t[0], t]));
+const wkName = k => (WOK.bases.find(b => b[0] === k) || WOK.sauces.find(b => b[0] === k))[1];
+const wkPrice = () => WOK.base + Object.entries(wk.tops).reduce((a,[k,q]) => a + WT[k][2]*q, 0);
+function wkRender(){
+  $('.js-wk-bases').innerHTML = WOK.bases.map(([k,n]) => `<button class="wk-chip${wk.base===k?' on':''}" data-wb="${k}">${n}</button>`).join('');
+  $('.js-wk-tops').innerHTML = WOK.tops.map(([k,n,p]) => { const q = wk.tops[k]||0; return `<div class="wk-t${q?' on':''}" data-wt="${k}"><img src="wok/${k}.webp" alt="" loading="lazy"><b>${n}</b>${q ? `<div class="wk-q"><button data-wq="-" aria-label="Меньше">−</button>${q}<button data-wq="+" aria-label="Больше">+</button></div>` : `<span class="pr">+${p} ₽</span>`}</div>`; }).join('');
+  $('.js-wk-sauces').innerHTML = WOK.sauces.map(([k,n]) => `<div class="wk-s${wk.sauce===k?' on':''}" data-ws="${k}"><img src="wok/${k}.webp" alt="" loading="lazy"><b>${n}</b></div>`).join('');
+  $('.js-wk-vis').innerHTML = Object.entries(wk.tops).map(([k,q]) => `<span style="background-image:url(wok/${k}.webp)" data-q="${q}" title="${WT[k][1]}"></span>`).join('');
+  const tl = Object.entries(wk.tops).map(([k,q]) => WT[k][1].toLowerCase() + (q>1?' ×'+q:''));
+  $('.js-wk-sum').textContent = wkName(wk.base) + (tl.length ? ' · ' + tl.join(', ') : ' · без топпингов') + (wk.sauce ? ' · ' + wkName(wk.sauce).toLowerCase() : '');
+  $('.js-wk-price').textContent = rub(wkPrice());
+}
+$('#cat-wok').addEventListener('click', e => {
+  const b = e.target.closest('[data-wb]'), q = e.target.closest('[data-wq]'), t = e.target.closest('[data-wt]'), sc = e.target.closest('[data-ws]');
+  if (b) { wk.base = b.dataset.wb; const im = $('.js-wk-img'); im.classList.add('sw'); setTimeout(() => { im.src = 'wok/' + wk.base + '.webp'; im.classList.remove('sw'); }, 220); }
+  else if (q) { const k = q.closest('[data-wt]').dataset.wt; const n = (wk.tops[k]||0) + (q.dataset.wq === '+' ? 1 : -1); if (n > 0) wk.tops[k] = Math.min(n, 5); else delete wk.tops[k]; }
+  else if (t) { const k = t.dataset.wt; if (!wk.tops[k]) wk.tops[k] = 1; }
+  else if (sc) { wk.sauce = sc.dataset.ws; $('.js-wk-sstep').classList.remove('need'); }
+  else return;
+  wkRender();
+});
+$('.js-wk-add').addEventListener('click', () => {
+  if (!wk.sauce) { const st = $('.js-wk-sstep'); st.classList.add('need'); st.scrollIntoView({behavior:'smooth', block:'center'}); toast('Выберите соус'); return; }
+  const tops = Object.keys(wk.tops).sort();
+  const id = 'wok-' + [wk.base, wk.sauce].concat(tops.map(k => k + wk.tops[k])).join('-');
+  const tl = tops.map(k => WT[k][1] + (wk.tops[k]>1 ? ' ×' + wk.tops[k] : ''));
+  const w = { id, t: 'WOK: ' + wkName(wk.base), d: 'Овощной микс' + (tl.length ? ', ' + tl.join(', ') : '') + '. Соус ' + wkName(wk.sauce).toLowerCase() + '.', p: wkPrice() };
+  WOKS[id] = w; try { localStorage.setItem('sm-wok', JSON.stringify(WOKS)); } catch(e) {}
+  regWok(w);
+  flyFrom($('.js-wk-img'), id); setQty(id, (cart[id]||0) + 1); toast('WOK добавлен в корзину');
+});
+wkRender();
 
 sync();
 </script>
