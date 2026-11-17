@@ -4,6 +4,7 @@ import glob, os, re
 from PIL import Image
 os.makedirs('ph', exist_ok=True)
 src = {os.path.basename(f)[:-4]: f for f in glob.glob('orig/*.jpg')}
+src.update({os.path.basename(f)[:-4]: f for f in glob.glob('orig_st/*.jpg')})
 src.update({os.path.basename(f)[:-4]: f for f in glob.glob('orig_rw/*.jpg')})
 for i, f in src.items():
     im = Image.open(f).convert('RGB')
