@@ -26,7 +26,7 @@ for c in menu:
     for it in c['items']:
         if it['img']:
             dst = 'cut/%s.webp' % it['id']
-            if not os.path.exists(dst): cut(it['img'], dst)
+            pass  # фото вырезаются нейросетью: python cutout.py img cut isnet-general-use
             it['img'] = dst
         d = it['d']
         w = ''
