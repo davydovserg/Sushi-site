@@ -43,3 +43,6 @@ for c in menu:
         it['t'] = it['t'].replace('«', '').replace('»', '').strip()
 open('data.js', 'w', encoding='utf-8').write('window.MENU=' + json.dumps(menu, ensure_ascii=False) + ';')
 print('ok', sum(len(c['items']) for c in menu))
+
+# фото целиком, без вырезки
+import runpy; runpy.run_path('photos.py')
