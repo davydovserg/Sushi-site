@@ -75,7 +75,9 @@ for i in ids:
     im = Image.open(f'orig/{i}.jpg').convert('RGB')
     a = remove(im, session=s, only_mask=True).convert('L')
     a = fill_holes(a)
-    if i in MIRROR: a = cut_line(a, MIRROR[i])
+    if i in MIRROR:
+        a = cut_line(a, MIRROR[i])
+        a = a.filter(ImageFilter.MinFilter(31)).filter(ImageFilter.MaxFilter(31)).filter(ImageFilter.GaussianBlur(1.2))  # скруглить углы, убрать полоски
     obj = im.copy(); obj.putalpha(a)
     bb = a.point(lambda v: 255 if v > 30 else 0).getbbox()
     if not bb: continue
@@ -84,10 +86,19 @@ for i in ids:
     obj = obj.resize((int(obj.width * k), int(obj.height * k)), Image.LANCZOS)
     x, y = (W - obj.width) // 2, int(H * 0.78) - obj.height
     out = bg()
-    refl = obj.transpose(Image.FLIP_TOP_BOTTOM)
-    fade = Image.linear_gradient('L').resize(refl.size).point(lambda v: int(max(0, 255 - v * 2.2) * 0.22))
-    refl.putalpha(ImageChops.multiply(refl.split()[3], fade))
-    out.paste(refl, (x, y + obj.height - 2), refl)
+    # отражение от низа каждого столбца (как на зеркальном столе)
+    A = np.asarray(obj).astype(np.float32); hh, ww = A.shape[:2]
+    al = A[:, :, 3] > 40
+    yb = np.where(al.any(0), hh - 1 - np.argmax(al[::-1], 0), -1)
+    L = int(hh * .45); R = np.zeros((hh + L, ww, 4), np.float32)
+    cols = np.arange(ww)
+    for j in range(L):
+        src = yb - j; ok = (yb >= 0) & (src >= 0)
+        c = cols[ok]; R[yb[ok] + 1 + j, c] = A[src[ok], c]
+        R[yb[ok] + 1 + j, c, 3] *= max(0.0, 1 - j / L) ** 1.6 * 0.24
+    R[:, :, 3] *= 1  # keep
+    refl = Image.fromarray(R.clip(0, 255).astype(np.uint8), 'RGBA')
+    out.paste(refl, (x, y), refl)
     out.paste(obj, (x, y), obj)
     out.save(f'orig_st/{i}.jpg', quality=92)
 print('done')
